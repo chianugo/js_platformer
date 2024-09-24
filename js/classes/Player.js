@@ -14,7 +14,7 @@ class Player {
       x: 0,
       y: 0,
     };
-    this.gravity = 5;
+    this.gravity = 1;
   }
 
   draw() {

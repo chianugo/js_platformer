@@ -17,3 +17,21 @@ function animate() {
 }
 
 animate();
+
+window.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  switch (event.key) {
+    case " w":
+    case "ArrowUp":
+      player.velocity.y = -10;
+    case " a":
+    case "ArrowLeft":
+      break;
+    case " s":
+    case "ArrowDown":
+      break;
+    case "d":
+    case "ArrowRight":
+      break;
+  }
+});
