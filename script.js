@@ -12,11 +12,21 @@ class Player {
     };
     this.width = 100;
     this.height = 100;
+    this.sides = {
+      bottom: this.position.y + this.height,
+    };
   }
 
   draw() {
     context.fillStyle = "red";
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
+
+  update() {
+    if (this.sides.bottom <= canvas.height) {
+      this.position.y += 2;
+      this.sides.bottom = this.position.y + this.height;
+    }
   }
 }
 const player = new Player();
@@ -28,10 +38,7 @@ function animate() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   // Draw Player
   player.draw();
-
-  if (player.position.y <= canvas.height - player.height) {
-    player.position.y += 2;
-  }
+  player.update();
 }
 
 animate();
