@@ -24,16 +24,15 @@ class Player {
 
   update() {
     this.position.y += this.velocity.y;
+    this.sides.bottom = this.position.y + this.height;
 
     // Above the bottom of canvas
     if (this.sides.bottom + this.velocity.y <= canvas.height) {
       this.velocity.y += this.gravity;
-      this.sides.bottom = this.position.y + this.height;
     } else {
       this.velocity.y = 0;
       // Reset box in case of overshoot due to high gravity values
       this.position.y = canvas.height - this.height;
-      this.sides.bottom = this.position.y + this.height;
     }
   }
 }
