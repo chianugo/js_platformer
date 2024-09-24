@@ -9,6 +9,12 @@ class Player {
     this.sides = {
       bottom: this.position.y + this.height,
     };
+
+    this.velocity = {
+      x: 0,
+      y: 0,
+    };
+    this.gravity = 5;
   }
 
   draw() {
@@ -17,8 +23,16 @@ class Player {
   }
 
   update() {
-    if (this.sides.bottom <= canvas.height) {
-      this.position.y += 2;
+    this.position.y += this.velocity.y;
+
+    // Above the bottom of canvas
+    if (this.sides.bottom + this.velocity.y <= canvas.height) {
+      this.velocity.y += this.gravity;
+      this.sides.bottom = this.position.y + this.height;
+    } else {
+      this.velocity.y = 0;
+      // Reset box in case of overshoot due to high gravity values
+      this.position.y = canvas.height - this.height;
       this.sides.bottom = this.position.y + this.height;
     }
   }
