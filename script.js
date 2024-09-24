@@ -6,6 +6,7 @@ canvas.height = 576;
 
 let y = 100;
 let x = 100;
+maxHeight = 576;
 function animate() {
   window.requestAnimationFrame(animate);
   // Draw Player
@@ -14,7 +15,9 @@ function animate() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.fillStyle = "red";
   context.fillRect(x, y, 100, 100);
-  y++;
+  if (y <= maxHeight - 100) {
+    y++;
+  }
 }
 
 animate();
