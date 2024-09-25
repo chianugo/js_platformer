@@ -6,11 +6,30 @@ canvas.height = 576;
 
 const player = new Player();
 
+const keys = {
+  w: {
+    isPressed: false,
+  },
+  a: {
+    isPressed: false,
+  },
+  d: {
+    isPressed: false,
+  },
+};
+
 function animate() {
   window.requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.fillStyle = "white";
   context.fillRect(0, 0, canvas.width, canvas.height);
+  player.velocity.x = 0;
+  if (keys.d.isPressed) {
+    player.velocity.x = 5;
+  } else if (keys.a.isPressed) {
+    player.velocity.x = -5;
+  }
+
   // Draw Player
   player.draw();
   player.update();
@@ -29,13 +48,13 @@ window.addEventListener("keydown", (event) => {
       break;
     case "a":
     case "ArrowLeft":
-      player.velocity.x = -4;
+      keys.a.isPressed = true;
       break;
     case "ArrowDown":
       break;
     case "d":
     case "ArrowRight":
-      player.velocity.x = 4;
+      keys.d.isPressed = true;
       break;
   }
 });
@@ -44,13 +63,13 @@ window.addEventListener("keyup", (event) => {
   switch (event.key) {
     case "a":
     case "ArrowLeft":
-      player.velocity.x = 0;
+      keys.a.isPressed = false;
       break;
     case "ArrowDown":
       break;
     case "d":
     case "ArrowRight":
-      player.velocity.x = 0;
+      keys.d.isPressed = false;
       break;
   }
 });
