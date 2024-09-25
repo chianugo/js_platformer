@@ -19,19 +19,38 @@ function animate() {
 animate();
 
 window.addEventListener("keydown", (event) => {
-  console.log(event.key);
+  // console.log(event.key);
   switch (event.key) {
-    case " w":
+    case "w":
     case "ArrowUp":
-      player.velocity.y = -10;
-    case " a":
-    case "ArrowLeft":
+      console.log(event.key);
+      // if (player.velocity.y === 0)
+      player.velocity.y = -20;
       break;
-    case " s":
+    case "a":
+    case "ArrowLeft":
+      player.velocity.x = -4;
+      break;
     case "ArrowDown":
       break;
     case "d":
     case "ArrowRight":
+      player.velocity.x = 4;
+      break;
+  }
+});
+
+window.addEventListener("keyup", (event) => {
+  switch (event.key) {
+    case "a":
+    case "ArrowLeft":
+      player.velocity.x = 0;
+      break;
+    case "ArrowDown":
+      break;
+    case "d":
+    case "ArrowRight":
+      player.velocity.x = 0;
       break;
   }
 });
