@@ -29,7 +29,7 @@ class CollisionBlock {
   }
 
   draw() {
-    context.fillStyle = "red";
+    context.fillStyle = "rgba(255, 0, 0, 0.4)";
     context.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 }
