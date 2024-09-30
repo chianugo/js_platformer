@@ -1,5 +1,5 @@
 class Player {
-  constructor({ collisionBlocks = [] }) {
+  constructor() {
     this.position = {
       x: 100,
       y: 100,
@@ -15,9 +15,6 @@ class Player {
       y: 0,
     };
     this.gravity = 1;
-
-    this.collisionBlocks = collisionBlocks;
-    console.log(this.collisionBlocks);
   }
 
   draw() {

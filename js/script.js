@@ -4,9 +4,6 @@ const context = canvas.getContext("2d");
 canvas.width = 1024;
 canvas.height = 576;
 
-const parsedCollisions = collisionsLevel1.parse2D();
-const collisionBlocks = parsedCollisions.createObjectsFrom2D();
-
 const backgroundLevel1 = new Sprite({
   position: {
     x: 0,
@@ -15,9 +12,7 @@ const backgroundLevel1 = new Sprite({
   imageSrc: "./img/backgroundLevel1.png",
 });
 
-const player = new Player({
-  collisionBlocks: collisionBlocks,
-});
+const player = new Player();
 
 const keys = {
   w: {
