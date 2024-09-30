@@ -19,5 +19,25 @@ Array.prototype.parse2D = function () {
   return rows;
 };
 
+class CollisionBlock {
+  constructor({ position }) {
+    this.position = position;
+    this.width = 64;
+    this.height = 64;
+  }
+
+  draw() {
+    context.fillStyle = "red";
+    context.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
+}
+
 const parsedCollisions = collisionsLevel1.parse2D();
-console.log(parsedCollisions);
+parsedCollisions.forEach((row) => {
+  // each item in column
+  row.forEach((symbol) => {
+    if (symbol == 292) {
+      // push new collision into collisonblocks array
+    }
+  });
+});
