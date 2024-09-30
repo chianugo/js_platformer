@@ -1,3 +1,5 @@
+const BLOCK_SIZE = 64;
+
 const collisionsLevel1 = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292, 292,
@@ -22,8 +24,8 @@ Array.prototype.parse2D = function () {
 class CollisionBlock {
   constructor({ position }) {
     this.position = position;
-    this.width = 64;
-    this.height = 64;
+    this.width = BLOCK_SIZE;
+    this.height = BLOCK_SIZE;
   }
 
   draw() {
@@ -32,12 +34,22 @@ class CollisionBlock {
   }
 }
 
+const collisionBlocks = [];
+
 const parsedCollisions = collisionsLevel1.parse2D();
-parsedCollisions.forEach((row) => {
+parsedCollisions.forEach((row, y) => {
   // each item in column
-  row.forEach((symbol) => {
+  row.forEach((symbol, x) => {
     if (symbol == 292) {
       // push new collision into collisonblocks array
+      collisionBlocks.push(
+        new CollisionBlock({
+          position: {
+            x: x * BLOCK_SIZE,
+            y: y * BLOCK_SIZE,
+          },
+        })
+      );
     }
   });
 });

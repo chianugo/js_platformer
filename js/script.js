@@ -29,6 +29,9 @@ const keys = {
 function animate() {
   window.requestAnimationFrame(animate);
   backgroundLevel1.draw();
+  collisionBlocks.forEach((CollisionBlock) => {
+    CollisionBlock.draw();
+  });
 
   player.velocity.x = 0;
   if (keys.d.isPressed) {
