@@ -1,9 +1,9 @@
 window.addEventListener("keydown", (event) => {
-  // console.log(event.key);
+  console.log(event.key);
   switch (event.key) {
     case "w":
     case "ArrowUp":
-      console.log(event.key);
+    case " ":
       if (player.velocity.y === 0) player.velocity.y = -25;
       break;
     case "a":
