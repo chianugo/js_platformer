@@ -4,8 +4,7 @@ window.addEventListener("keydown", (event) => {
     case "w":
     case "ArrowUp":
       console.log(event.key);
-      // if (player.velocity.y === 0)
-      player.velocity.y = -20;
+      if (player.velocity.y === 0) player.velocity.y = -25;
       break;
     case "a":
     case "ArrowLeft":
