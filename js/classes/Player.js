@@ -32,12 +32,12 @@ class Player extends Sprite {
     this.checkForHorizontalCollisions();
     this.applyGravity();
     this.updateHitbox();
-    context.fillRect(
-      this.hitbox.position.x,
-      this.hitbox.position.y,
-      this.hitbox.width,
-      this.hitbox.height
-    );
+    // context.fillRect(
+    //   this.hitbox.position.x,
+    //   this.hitbox.position.y,
+    //   this.hitbox.width,
+    //   this.hitbox.height
+    // );
     this.checkForVerticalCollisions();
   }
 
@@ -69,12 +69,15 @@ class Player extends Sprite {
           collisionBlock.position.y + collisionBlock.height
       ) {
         if (this.velocity.x < 0) {
+          const offset = this.hitbox.position.x - this.position.x;
           this.position.x =
-            collisionBlock.position.x + collisionBlock.width + 0.01;
+            collisionBlock.position.x + collisionBlock.width - offset + 0.01;
           break;
         }
         if (this.velocity.x > 0) {
-          this.position.x = collisionBlock.position.x - this.width - 0.01;
+          const offset =
+            this.hitbox.position.x - this.position.x + this.hitbox.width;
+          this.position.x = collisionBlock.position.x - offset - 0.01;
           break;
         }
       }
