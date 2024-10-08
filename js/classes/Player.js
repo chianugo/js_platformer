@@ -24,12 +24,26 @@ class Player extends Sprite {
   // }
 
   update() {
-    context.fillStyle = "rgba(0, 0, 255, 0.4)";
-    context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    // Blue box
+    // context.fillStyle = "rgba(0, 0, 255, 0.4)";
+    // context.fillRect(this.position.x, this.position.y, this.width, this.height);
     this.position.x += this.velocity.x;
     this.checkForHorizontalCollisions();
-
     this.applyGravity();
+    this.hitbox = {
+      position: {
+        x: this.position.x + 60,
+        y: this.position.y + 35,
+      },
+      width: 50,
+      height: 53,
+    };
+    context.fillRect(
+      this.hitbox.position.x,
+      this.hitbox.position.y,
+      this.hitbox.width,
+      this.hitbox.height
+    );
     this.checkForVerticalCollisions();
   }
 
