@@ -28,16 +28,10 @@ class Player extends Sprite {
     // context.fillStyle = "rgba(0, 0, 255, 0.4)";
     // context.fillRect(this.position.x, this.position.y, this.width, this.height);
     this.position.x += this.velocity.x;
+    this.updateHitbox();
     this.checkForHorizontalCollisions();
     this.applyGravity();
-    this.hitbox = {
-      position: {
-        x: this.position.x + 60,
-        y: this.position.y + 35,
-      },
-      width: 50,
-      height: 53,
-    };
+    this.updateHitbox();
     context.fillRect(
       this.hitbox.position.x,
       this.hitbox.position.y,
@@ -47,6 +41,17 @@ class Player extends Sprite {
     this.checkForVerticalCollisions();
   }
 
+  updateHitbox() {
+    this.hitbox = {
+      position: {
+        x: this.position.x + 60,
+        y: this.position.y + 35,
+      },
+      width: 50,
+      height: 53,
+    };
+  }
+
   checkForHorizontalCollisions() {
     // Check for horizontal collisions
     for (let i = 0; i < this.collisionBlocks.length; i++) {
@@ -54,10 +59,14 @@ class Player extends Sprite {
 
       // check if a collision exists from
       if (
-        this.position.x <= collisionBlock.position.x + collisionBlock.width &&
-        this.position.x + this.width >= collisionBlock.position.x &&
-        this.position.y + this.height >= collisionBlock.position.y &&
-        this.position.y <= collisionBlock.position.y + collisionBlock.height
+        this.hitbox.position.x <=
+          collisionBlock.position.x + collisionBlock.width &&
+        this.hitbox.position.x + this.hitbox.width >=
+          collisionBlock.position.x &&
+        this.hitbox.position.y + this.hitbox.height >=
+          collisionBlock.position.y &&
+        this.hitbox.position.y <=
+          collisionBlock.position.y + collisionBlock.height
       ) {
         if (this.velocity.x < 0) {
           this.position.x =
