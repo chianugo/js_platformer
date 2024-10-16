@@ -1,15 +1,15 @@
 class Sprite {
-  constructor({ position, imageSrc, spriteFrames = 1 }) {
+  constructor({ position, imageSrc, frameRate = 1 }) {
     this.position = position;
     this.image = new Image();
     this.image.onload = () => {
       this.loaded = true;
-      this.width = this.image.width / this.spriteFrames;
+      this.width = this.image.width / this.frameRate;
       this.height = this.image.height;
     };
     this.image.src = imageSrc;
     this.loaded = false;
-    this.spriteFrames = spriteFrames;
+    this.frameRate = frameRate;
     this.currentFrame = 0;
     this.elapsedFrames = 0;
     this.frammeBuffer = 2;
@@ -43,7 +43,7 @@ class Sprite {
     this.elapsedFrames++;
 
     if (this.elapsedFrames % this.frammeBuffer === 0) {
-      if (this.currentFrame < this.spriteFrames - 1) {
+      if (this.currentFrame < this.frameRate - 1) {
         this.currentFrame++;
       } else {
         this.currentFrame = 0;

@@ -18,7 +18,29 @@ const backgroundLevel1 = new Sprite({
 const player = new Player({
   collisionBlocks: collisionBlocks,
   imageSrc: "./img/king/idleRight.png",
-  spriteFrames: 11,
+  frameRate: 11,
+  animations: {
+    idleRight: {
+      frameRate: 11,
+      frameBuffer: 2,
+      loop: true,
+    },
+    idleLeft: {
+      frameRate: 11,
+      frameBuffer: 2,
+      loop: true,
+    },
+    runRight: {
+      frameRate: 8,
+      frameBuffer: 2,
+      loop: true,
+    },
+    runLeft: {
+      frameRate: 8,
+      frameBuffer: 2,
+      loop: true,
+    },
+  },
 });
 
 const keys = {
