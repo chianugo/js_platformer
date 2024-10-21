@@ -4,19 +4,12 @@ const context = canvas.getContext("2d");
 canvas.width = 1024;
 canvas.height = 576;
 
-const parsedCollisions = collisionsLevel1.parse2D();
-const collisionBlocks = parsedCollisions.createObjectsFrom2D();
-
-const backgroundLevel1 = new Sprite({
-  position: {
-    x: 0,
-    y: 0,
-  },
-  imageSrc: "./img/backgroundLevel1.png",
-});
+let parsedCollisions;
+let collisionBlocks;
+let background;
+let doors;
 
 const player = new Player({
-  collisionBlocks: collisionBlocks,
   imageSrc: "./img/king/idleRight.png",
   frameRate: 11,
   animations: {
@@ -59,19 +52,37 @@ const player = new Player({
   },
 });
 
-const doors = [
-  new Sprite({
-    position: {
-      x: 740,
-      y: 270,
+let level = 1;
+let levels = {
+  1: {
+    init: () => {
+      parsedCollisions = collisionsLevel1.parse2D();
+      collisionBlocks = parsedCollisions.createObjectsFrom2D();
+      (player.collisionBlocks = collisionBlocks),
+        (background = new Sprite({
+          position: {
+            x: 0,
+            y: 0,
+          },
+          imageSrc: "./img/backgroundLevel1.png",
+        }));
+
+      doors = [
+        new Sprite({
+          position: {
+            x: 740,
+            y: 270,
+          },
+          imageSrc: "./img/doorOpen.png",
+          frameRate: 5,
+          frameBuffer: 6,
+          loop: false,
+          autoplay: false,
+        }),
+      ];
     },
-    imageSrc: "./img/doorOpen.png",
-    frameRate: 5,
-    frameBuffer: 6,
-    loop: false,
-    autoplay: false,
-  }),
-];
+  },
+};
 
 const keys = {
   w: {
@@ -91,7 +102,7 @@ const overlay = {
 
 function animate() {
   window.requestAnimationFrame(animate);
-  backgroundLevel1.draw();
+  background.draw();
   collisionBlocks.forEach((CollisionBlock) => {
     CollisionBlock.draw();
   });
@@ -110,5 +121,7 @@ function animate() {
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.restore();
 }
+
+levels[level].init();
 
 animate();
