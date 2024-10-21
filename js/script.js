@@ -56,6 +56,7 @@ const doors = [
     imageSrc: "./img/doorOpen.png",
     frameRate: 5,
     frameBuffer: 6,
+    loop: false,
   }),
 ];
 
