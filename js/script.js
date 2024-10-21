@@ -47,6 +47,18 @@ const player = new Player({
   },
 });
 
+const doors = [
+  new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: "./img/doorOpen.png",
+    frameRate: 5,
+    frameBuffer: 6,
+  }),
+];
+
 const keys = {
   w: {
     isPressed: false,
@@ -66,6 +78,9 @@ function animate() {
     CollisionBlock.draw();
   });
 
+  doors.forEach((door) => {
+    door.draw();
+  });
   player.velocity.x = 0;
   if (keys.d.isPressed) {
     player.switchSprite("runRight");
