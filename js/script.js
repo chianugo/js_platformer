@@ -59,20 +59,21 @@ const player = new Player({
   },
 });
 
-let level = 1;
+let level = 2;
 let levels = {
   1: {
     init: () => {
       parsedCollisions = collisionsLevel1.parse2D();
       collisionBlocks = parsedCollisions.createObjectsFrom2D();
-      (player.collisionBlocks = collisionBlocks),
-        (background = new Sprite({
-          position: {
-            x: 0,
-            y: 0,
-          },
-          imageSrc: "./img/backgroundLevel1.png",
-        }));
+      player.collisionBlocks = collisionBlocks;
+
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: "./img/backgroundLevel1.png",
+      });
 
       doors = [
         new Sprite({
@@ -91,22 +92,24 @@ let levels = {
   },
   2: {
     init: () => {
-      parsedCollisions = collisionsLevel1.parse2D();
+      parsedCollisions = collisionsLevel2.parse2D();
       collisionBlocks = parsedCollisions.createObjectsFrom2D();
-      (player.collisionBlocks = collisionBlocks),
-        (background = new Sprite({
-          position: {
-            x: 0,
-            y: 0,
-          },
-          imageSrc: "./img/backgroundLevel2.png",
-        }));
+      player.collisionBlocks = collisionBlocks;
+      player.position.x = 96;
+      player.position.y = 140;
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: "./img/backgroundLevel2.png",
+      });
 
       doors = [
         new Sprite({
           position: {
-            x: 740,
-            y: 270,
+            x: 772,
+            y: 336,
           },
           imageSrc: "./img/doorOpen.png",
           frameRate: 5,
