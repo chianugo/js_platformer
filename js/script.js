@@ -34,13 +34,13 @@ const player = new Player({
     },
     runRight: {
       frameRate: 8,
-      frameBuffer: 2,
+      frameBuffer: 4,
       loop: true,
       imageSrc: "./img/king/runRight.png",
     },
     runLeft: {
       frameRate: 8,
-      frameBuffer: 2,
+      frameBuffer: 4,
       loop: true,
       imageSrc: "./img/king/runLeft.png",
     },
@@ -68,9 +68,19 @@ function animate() {
 
   player.velocity.x = 0;
   if (keys.d.isPressed) {
+    player.switchSprite("runRight");
     player.velocity.x = 5;
+    player.lastDirection = "right";
   } else if (keys.a.isPressed) {
+    player.switchSprite("runLeft");
     player.velocity.x = -5;
+    player.lastDirection = "left";
+  } else {
+    if (player.lastDirection === "left") {
+      player.switchSprite("idleLeft");
+    } else {
+      player.switchSprite("idleRight");
+    }
   }
 
   // Draw Player
