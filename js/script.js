@@ -49,6 +49,12 @@ const player = new Player({
       frameBuffer: 4,
       loop: false,
       imageSrc: "./img/king/enterDoor.png",
+      onComplete: () => {
+        console.log("Completed animation");
+        gsap.to(overlay, {
+          opacity: 1,
+        });
+      },
     },
   },
 });
@@ -79,6 +85,10 @@ const keys = {
   },
 };
 
+const overlay = {
+  opacity: 0,
+};
+
 function animate() {
   window.requestAnimationFrame(animate);
   backgroundLevel1.draw();
@@ -93,6 +103,12 @@ function animate() {
   // Draw Player
   player.draw();
   player.update();
+
+  context.save();
+  context.globalAlpha = overlay.opacity;
+  context.fillStyle = "black";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.restore();
 }
 
 animate();
