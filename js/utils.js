@@ -14,7 +14,7 @@ Array.prototype.createObjectsFrom2D = function () {
   this.forEach((row, y) => {
     // each item in column
     row.forEach((symbol, x) => {
-      if (symbol == 292) {
+      if (symbol == 292 || symbol == 250) {
         // push new collision into collisonblocks array
         objects.push(
           new CollisionBlock({

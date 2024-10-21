@@ -43,12 +43,17 @@ const player = new Player({
       loop: false,
       imageSrc: "./img/king/enterDoor.png",
       onComplete: () => {
-        console.log("Completed animation");
+        // console.log("Completed animation");
         gsap.to(overlay, {
           opacity: 1,
           onComplete: () => {
             level++;
+            if (level === 4) {
+              level = 1;
+            }
             levels[level].init();
+            player.switchSprite("idleRight");
+            player.preventInput = false;
             gsap.to(overlay, {
               opacity: 0,
             });
@@ -59,13 +64,16 @@ const player = new Player({
   },
 });
 
-let level = 2;
+let level = 1;
 let levels = {
   1: {
     init: () => {
       parsedCollisions = collisionsLevel1.parse2D();
       collisionBlocks = parsedCollisions.createObjectsFrom2D();
       player.collisionBlocks = collisionBlocks;
+      if (player.currentAnimation) {
+        player.currentAnimation.isActive = false;
+      }
 
       background = new Sprite({
         position: {
@@ -97,6 +105,9 @@ let levels = {
       player.collisionBlocks = collisionBlocks;
       player.position.x = 96;
       player.position.y = 140;
+      if (player.currentAnimation) {
+        player.currentAnimation.isActive = false;
+      }
       background = new Sprite({
         position: {
           x: 0,
@@ -110,6 +121,39 @@ let levels = {
           position: {
             x: 772,
             y: 336,
+          },
+          imageSrc: "./img/doorOpen.png",
+          frameRate: 5,
+          frameBuffer: 6,
+          loop: false,
+          autoplay: false,
+        }),
+      ];
+    },
+  },
+  3: {
+    init: () => {
+      parsedCollisions = collisionsLevel3.parse2D();
+      collisionBlocks = parsedCollisions.createObjectsFrom2D();
+      player.collisionBlocks = collisionBlocks;
+      player.position.x = 781;
+      player.position.y = 140;
+      if (player.currentAnimation) {
+        player.currentAnimation.isActive = false;
+      }
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: "./img/backgroundLevel3.png",
+      });
+
+      doors = [
+        new Sprite({
+          position: {
+            x: 174,
+            y: 332,
           },
           imageSrc: "./img/doorOpen.png",
           frameRate: 5,
@@ -141,9 +185,9 @@ const overlay = {
 function animate() {
   window.requestAnimationFrame(animate);
   background.draw();
-  collisionBlocks.forEach((CollisionBlock) => {
-    CollisionBlock.draw();
-  });
+  // collisionBlocks.forEach((CollisionBlock) => {
+  //   CollisionBlock.draw();
+  // });
 
   doors.forEach((door) => {
     door.draw();

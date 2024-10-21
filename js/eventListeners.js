@@ -2,7 +2,7 @@ window.addEventListener("keydown", (event) => {
   if (player.preventInput == true) {
     return;
   }
-  console.log(event.key);
+  // console.log(event.key);
   switch (event.key) {
     case "w":
     case "ArrowUp":
@@ -25,7 +25,7 @@ window.addEventListener("keydown", (event) => {
           return;
         }
       }
-      if (player.velocity.y === 0) player.velocity.y = -25;
+      if (player.velocity.y === 0) player.velocity.y = -15;
       break;
     case "a":
     case "ArrowLeft":
