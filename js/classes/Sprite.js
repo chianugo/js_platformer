@@ -33,7 +33,7 @@ class Sprite {
         this.animations[key].image = image;
       }
 
-      console.log(this.animations);
+      // console.log(this.animations);
     }
   }
 
