@@ -46,6 +46,13 @@ const player = new Player({
         console.log("Completed animation");
         gsap.to(overlay, {
           opacity: 1,
+          onComplete: () => {
+            level++;
+            levels[level].init();
+            gsap.to(overlay, {
+              opacity: 0,
+            });
+          },
         });
       },
     },
@@ -65,6 +72,34 @@ let levels = {
             y: 0,
           },
           imageSrc: "./img/backgroundLevel1.png",
+        }));
+
+      doors = [
+        new Sprite({
+          position: {
+            x: 740,
+            y: 270,
+          },
+          imageSrc: "./img/doorOpen.png",
+          frameRate: 5,
+          frameBuffer: 6,
+          loop: false,
+          autoplay: false,
+        }),
+      ];
+    },
+  },
+  2: {
+    init: () => {
+      parsedCollisions = collisionsLevel1.parse2D();
+      collisionBlocks = parsedCollisions.createObjectsFrom2D();
+      (player.collisionBlocks = collisionBlocks),
+        (background = new Sprite({
+          position: {
+            x: 0,
+            y: 0,
+          },
+          imageSrc: "./img/backgroundLevel2.png",
         }));
 
       doors = [
